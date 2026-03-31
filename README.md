@@ -540,6 +540,6 @@ Full Stack Java Developer
 <p>
   Connect with me:
   <a href="https://www.linkedin.com/in/yashlone421/" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Visit-black?logo=github" />
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin" />
   </a>
 </p>
