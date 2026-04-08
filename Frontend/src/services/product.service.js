@@ -1,23 +1,21 @@
-import axios from "axios";
-import authHeader from "./auth-header";
+import axios from "../utils/axiosInterceptor";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/auth/";
-const PRODUCT_API_URL = API_URL.replace("/auth/", "/products");
+const API_URL = "/products";
 
 const getAll = () => {
-    return axios.get(PRODUCT_API_URL, { headers: authHeader() });
+    return axios.get(API_URL);
 };
 
 const create = (data) => {
-    return axios.post(PRODUCT_API_URL, data, { headers: authHeader() });
+    return axios.post(API_URL, data);
 };
 
 const update = (id, data) => {
-    return axios.put(`${PRODUCT_API_URL}/${id}`, data, { headers: authHeader() });
+    return axios.put(`${API_URL}/${id}`, data);
 };
 
 const deactivate = (id) => {
-    return axios.delete(`${PRODUCT_API_URL}/${id}`, { headers: authHeader() });
+    return axios.delete(`${API_URL}/${id}`);
 };
 
 const productService = {

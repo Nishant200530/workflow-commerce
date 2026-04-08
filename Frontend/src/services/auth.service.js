@@ -19,7 +19,17 @@ const login = (username, password) => {
     })
     .then((response) => {
       if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        // ✅ FIX: Properly store user with roles
+        const user = {
+          token: response.data.token,
+          type: response.data.type,
+          id: response.data.id,
+          username: response.data.username,
+          email: response.data.email,
+          roles: response.data.roles, // 🔥 IMPORTANT
+        };
+
+        localStorage.setItem("user", JSON.stringify(user));
       }
       return response.data;
     });

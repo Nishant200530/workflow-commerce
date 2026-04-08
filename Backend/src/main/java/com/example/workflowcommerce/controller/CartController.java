@@ -44,7 +44,7 @@ public class CartController {
 
     // USER: Add item to cart
     @PostMapping("/add")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> addToCart(@Valid @RequestBody AddToCartRequest request, 
                                         Authentication authentication) {
         try {
@@ -69,7 +69,7 @@ public class CartController {
 
     // USER: Update cart item quantity
     @PutMapping("/update")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> updateCartItem(@Valid @RequestBody UpdateCartRequest request,
                                             Authentication authentication) {
         try {
@@ -93,7 +93,7 @@ public class CartController {
 
     // USER: Remove item from cart
     @DeleteMapping("/remove/{itemId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> removeFromCart(@PathVariable Long itemId,
                                             Authentication authentication) {
         try {
@@ -108,7 +108,7 @@ public class CartController {
 
     // USER: Get my cart
     @GetMapping("/my")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> getMyCart(Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -130,7 +130,7 @@ public class CartController {
 
     // ADMIN: Get all carts
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @Transactional(readOnly = true)
     public ResponseEntity<?> getAllCarts() {
         try {

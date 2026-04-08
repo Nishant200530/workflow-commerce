@@ -21,7 +21,7 @@ public class ShippingController {
     @Autowired
     private ShippingService shippingService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @PostMapping("/calculate-cost")
     public ResponseEntity<?> calculateShippingCost(@RequestBody Map<String, String> request) {
         String shippingMethod = request.get("shippingMethod");
@@ -30,7 +30,7 @@ public class ShippingController {
         return ResponseEntity.ok(Map.of("cost", cost));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @PostMapping("/create/{orderId}")
     public ResponseEntity<?> createShipping(
             @PathVariable Long orderId,
@@ -43,7 +43,7 @@ public class ShippingController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @PutMapping("/update-status/{shippingId}")
     public ResponseEntity<?> updateShippingStatus(
             @PathVariable Long shippingId,
@@ -56,13 +56,13 @@ public class ShippingController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @GetMapping("/all")
     public ResponseEntity<List<ShippingResponse>> getAllShippings() {
         return ResponseEntity.ok(shippingService.getAllShippings());
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @GetMapping("/my/{orderId}")
     public ResponseEntity<?> getMyShipping(@PathVariable Long orderId, Authentication authentication) {
         try {

@@ -56,7 +56,7 @@ public class WorkflowController {
      * Get all active workflow definitions
      */
     @GetMapping("/definitions")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<WorkflowDefinitionDTO>> getAllWorkflowDefinitions() {
         return ResponseEntity.ok(workflowEngineService.getAllWorkflowDefinitions());
     }
@@ -65,7 +65,7 @@ public class WorkflowController {
      * Get workflow definition by name with full details
      */
     @GetMapping("/definitions/{name}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<WorkflowDefinitionDTO> getWorkflowDefinition(@PathVariable String name) {
         return ResponseEntity.ok(workflowEngineService.getWorkflowDefinition(name));
     }
@@ -74,7 +74,7 @@ public class WorkflowController {
      * Get workflow statistics
      */
     @GetMapping("/definitions/{id}/stats")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<WorkflowStatsDTO> getWorkflowStats(@PathVariable Long id) {
         return ResponseEntity.ok(workflowEngineService.getWorkflowStats(id));
     }
@@ -85,7 +85,7 @@ public class WorkflowController {
      * Get all active workflow instances
      */
     @GetMapping("/instances")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<List<WorkflowInstanceDTO>> getAllActiveInstances(Authentication authentication) {
         String role = getPrimaryRole(authentication);
         return ResponseEntity.ok(workflowEngineService.getAllActiveInstances(role));
@@ -95,7 +95,7 @@ public class WorkflowController {
      * Get workflow instance by ID
      */
     @GetMapping("/instances/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<WorkflowInstanceDTO> getWorkflowInstance(
             @PathVariable Long id, Authentication authentication) {
         String role = getPrimaryRole(authentication);
@@ -106,7 +106,7 @@ public class WorkflowController {
      * Get active workflow instance for an entity
      */
     @GetMapping("/instances/entity/{entityType}/{entityId}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<WorkflowInstanceDTO> getWorkflowInstanceByEntity(
             @PathVariable String entityType,
             @PathVariable Long entityId,
@@ -119,7 +119,7 @@ public class WorkflowController {
      * Get all instances by entity type
      */
     @GetMapping("/instances/type/{entityType}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<List<WorkflowInstanceDTO>> getInstancesByEntityType(
             @PathVariable String entityType, Authentication authentication) {
         String role = getPrimaryRole(authentication);
@@ -130,7 +130,7 @@ public class WorkflowController {
      * Create a new workflow instance
      */
     @PostMapping("/instances")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<WorkflowInstanceDTO> createWorkflowInstance(
             @RequestParam String workflowName,
             @RequestParam String entityType,
@@ -151,7 +151,7 @@ public class WorkflowController {
      * Get allowed transitions for a workflow instance
      */
     @GetMapping("/instances/{id}/transitions")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<WorkflowTransitionDTO>> getAllowedTransitions(
             @PathVariable Long id, Authentication authentication) {
         String role = getPrimaryRole(authentication);
@@ -162,7 +162,7 @@ public class WorkflowController {
      * Execute a workflow transition
      */
     @PostMapping("/instances/{id}/transition")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<WorkflowInstanceDTO> executeTransition(
             @PathVariable Long id,
             @Valid @RequestBody TransitionRequest request,
@@ -185,7 +185,7 @@ public class WorkflowController {
      * Execute a workflow transition by entity
      */
     @PostMapping("/instances/entity/{entityType}/{entityId}/transition")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<WorkflowInstanceDTO> executeTransitionByEntity(
             @PathVariable String entityType,
             @PathVariable Long entityId,
@@ -212,7 +212,7 @@ public class WorkflowController {
      * Get workflow logs for an instance
      */
     @GetMapping("/instances/{id}/logs")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<WorkflowLogDTO>> getWorkflowLogs(@PathVariable Long id) {
         return ResponseEntity.ok(workflowEngineService.getWorkflowLogs(id));
     }
@@ -221,7 +221,7 @@ public class WorkflowController {
      * Get workflow logs for an entity
      */
     @GetMapping("/logs/entity/{entityType}/{entityId}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<WorkflowLogDTO>> getWorkflowLogsByEntity(
             @PathVariable String entityType, @PathVariable Long entityId) {
         return ResponseEntity.ok(workflowEngineService.getWorkflowLogsByEntity(entityType, entityId));
@@ -231,7 +231,7 @@ public class WorkflowController {
      * Get recent logs (last 24 hours)
      */
     @GetMapping("/logs/recent")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<List<WorkflowLogDTO>> getRecentLogs() {
         return ResponseEntity.ok(workflowEngineService.getRecentLogs());
     }
@@ -243,7 +243,7 @@ public class WorkflowController {
      * Creates workflow instances for all orders that don't have them
      */
     @PostMapping("/migrate/orders")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> migrateOrdersToWorkflow(Authentication authentication) {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         

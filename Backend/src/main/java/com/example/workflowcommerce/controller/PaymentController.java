@@ -39,7 +39,7 @@ public class PaymentController {
 
     // USER: Process Payment for Order
     @PostMapping("/{orderId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> processPayment(@PathVariable Long orderId, 
                                             @Valid @RequestBody PaymentRequest paymentRequest,
                                             Authentication authentication) {
@@ -86,7 +86,7 @@ public class PaymentController {
 
     // ADMIN: Get All Payments
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> getAllPayments(@RequestParam(required = false) String status) {
         try {
             List<Payment> payments;
@@ -117,7 +117,7 @@ public class PaymentController {
 
     // ADMIN: Refund Payment
     @PutMapping("/{paymentId}/refund")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> refundPayment(@PathVariable Long paymentId) {
         try {
             Optional<Payment> paymentOpt = paymentService.getPaymentById(paymentId);

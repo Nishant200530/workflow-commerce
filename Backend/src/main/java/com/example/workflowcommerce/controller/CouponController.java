@@ -30,7 +30,7 @@ public class CouponController {
     private CouponService couponService;
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> createCoupon(@Valid @RequestBody CouponCreateRequest request) {
         try {
             Coupon coupon = couponService.createCoupon(request);
@@ -41,7 +41,7 @@ public class CouponController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> updateCoupon(@PathVariable Long id, @Valid @RequestBody CouponCreateRequest request) {
         try {
             Coupon coupon = couponService.updateCoupon(id, request);
@@ -52,7 +52,7 @@ public class CouponController {
     }
 
     @PutMapping("/deactivate/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> deactivateCoupon(@PathVariable Long id) {
         try {
             Coupon coupon = couponService.deactivateCoupon(id);
@@ -63,13 +63,13 @@ public class CouponController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<List<Coupon>> getAllCoupons() {
         return ResponseEntity.ok(couponService.getAllCoupons());
     }
 
     @PostMapping("/apply")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> applyCoupon(@RequestBody CouponApplyRequest request) {
         try {
             CouponApplyResponse response = couponService.applyCoupon(request.getCouponCode(), request.getCartTotal());

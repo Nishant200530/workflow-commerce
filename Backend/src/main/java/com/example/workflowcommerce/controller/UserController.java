@@ -55,7 +55,7 @@ public class UserController {
 
     // USER: Get own profile
     @GetMapping("/me")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @Transactional(readOnly = true)
     public ResponseEntity<?> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -69,7 +69,7 @@ public class UserController {
 
     // ADMIN: Get all users
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @Transactional(readOnly = true)
     public ResponseEntity<?> getAllUsers(
             @RequestParam(required = false) Boolean status,
@@ -94,7 +94,7 @@ public class UserController {
 
     // ADMIN: Get user by ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     @Transactional(readOnly = true)
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         User user = userRepository.findById(id)
@@ -105,7 +105,7 @@ public class UserController {
 
     // ADMIN: Create new user
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserRequest userRequest) {
         // Check for duplicate username
         if (userRepository.existsByUsername(userRequest.getUsername())) {
@@ -150,7 +150,7 @@ public class UserController {
 
     // ADMIN: Update user
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequest userRequest) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -182,7 +182,7 @@ public class UserController {
 
     // ADMIN: Deactivate user (soft delete)
     @PutMapping("/{id}/deactivate")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> deactivateUser(@PathVariable Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));

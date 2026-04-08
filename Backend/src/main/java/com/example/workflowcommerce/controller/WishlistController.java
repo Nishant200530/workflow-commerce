@@ -34,7 +34,7 @@ public class WishlistController {
     private UserRepository userRepository;
 
     @PostMapping("/add/{productId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> addToWishlist(@PathVariable Long productId, Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -52,7 +52,7 @@ public class WishlistController {
     }
 
     @GetMapping("/my")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> getMyWishlist(Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -69,7 +69,7 @@ public class WishlistController {
     }
 
     @DeleteMapping("/remove/{itemId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> removeFromWishlist(@PathVariable Long itemId, Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -81,7 +81,7 @@ public class WishlistController {
     }
 
     @PostMapping("/move-to-cart/{itemId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> moveToCart(@PathVariable Long itemId, Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -93,7 +93,7 @@ public class WishlistController {
     }
 
     @GetMapping("/check/{productId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> checkProductInWishlist(@PathVariable Long productId, Authentication authentication) {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();

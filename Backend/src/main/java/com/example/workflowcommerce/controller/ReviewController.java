@@ -21,7 +21,7 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping("/add/{productId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> addReview(
             @PathVariable Long productId,
             @Valid @RequestBody ReviewRequest request,
@@ -35,7 +35,7 @@ public class ReviewController {
     }
 
     @PutMapping("/update/{reviewId}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<?> updateReview(
             @PathVariable Long reviewId,
             @Valid @RequestBody ReviewRequest request,
@@ -49,7 +49,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/delete/{reviewId}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> deleteReview(
             @PathVariable Long reviewId,
             Authentication authentication) {
@@ -65,7 +65,7 @@ public class ReviewController {
 
     // MODERATING
     @PutMapping("/approve/{reviewId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> approveReview(@PathVariable Long reviewId) {
         try {
             ReviewResponse response = reviewService.moderateReview(reviewId, true);
@@ -76,7 +76,7 @@ public class ReviewController {
     }
 
     @PutMapping("/reject/{reviewId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<?> rejectReview(@PathVariable Long reviewId) {
         try {
             ReviewResponse response = reviewService.moderateReview(reviewId, false);
@@ -87,7 +87,7 @@ public class ReviewController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority(\"ROLE_ADMIN\")")
     public ResponseEntity<List<ReviewResponse>> getAllReviews() {
         return ResponseEntity.ok(reviewService.getAllReviews());
     }
@@ -109,7 +109,7 @@ public class ReviewController {
     }
 
     @GetMapping("/my")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority(\"ROLE_USER\")")
     public ResponseEntity<List<ReviewResponse>> getMyReviews(Authentication authentication) {
         return ResponseEntity.ok(reviewService.getMyReviews(authentication.getName()));
     }

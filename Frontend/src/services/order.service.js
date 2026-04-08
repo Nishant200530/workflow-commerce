@@ -1,19 +1,17 @@
-import axios from "axios";
-import authHeader from "./auth-header";
+import axios from "../utils/axiosInterceptor";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8080/api/auth/";
-const ORDER_API_URL = API_BASE.replace("/auth/", "/orders");
+const API_URL = "/orders";
 
 const createOrder = (orderData) => {
-    return axios.post(ORDER_API_URL, orderData, { headers: authHeader() });
+    return axios.post(API_URL, orderData);
 };
 
 const getMyOrders = () => {
-    return axios.get(ORDER_API_URL + "/my", { headers: authHeader() });
+    return axios.get(`${API_URL}/my`);
 };
 
 const cancelOrder = (orderId) => {
-    return axios.put(ORDER_API_URL + "/" + orderId + "/cancel/user", {}, { headers: authHeader() });
+    return axios.put(`${API_URL}/${orderId}/cancel/user`);
 };
 
 const orderService = {
