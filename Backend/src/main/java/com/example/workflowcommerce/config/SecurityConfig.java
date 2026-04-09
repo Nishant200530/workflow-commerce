@@ -1,7 +1,9 @@
+```java
 package com.example.workflowcommerce.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -25,10 +27,9 @@ import com.example.workflowcommerce.security.jwt.AuthTokenFilter;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    // ✅ Inject filter (DO NOT use new)
+    @Autowired
+    private AuthTokenFilter authTokenFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,16 +38,17 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> {})
             .authorizeHttpRequests(auth -> auth
-                // ✅ PUBLIC APIs
+                // ✅ Public APIs
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/products/**").permitAll()     // ✅ FIXED
-                .requestMatchers("/api/categories/**").permitAll()   // ✅ FIXED
+                .requestMatchers("/api/products/**").permitAll()
+                .requestMatchers("/api/categories/**").permitAll()
 
-                // ✅ EVERYTHING ELSE PROTECTED
+                // ✅ All other APIs secured
                 .anyRequest().authenticated()
             );
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        // ✅ Add JWT filter correctly
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -90,3 +92,4 @@ public class SecurityConfig {
         return source;
     }
 }
+```
