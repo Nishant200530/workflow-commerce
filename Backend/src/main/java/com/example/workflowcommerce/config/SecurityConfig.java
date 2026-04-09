@@ -39,8 +39,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // ✅ PUBLIC APIs
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/products/public").permitAll()
-                .requestMatchers("/api/categories/public").permitAll()
+                .requestMatchers("/api/products/**").permitAll()     // ✅ FIXED
+                .requestMatchers("/api/categories/**").permitAll()   // ✅ FIXED
 
                 // ✅ EVERYTHING ELSE PROTECTED
                 .anyRequest().authenticated()
@@ -69,7 +69,9 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         configuration.setAllowedOrigins(List.of(
-                "http://localhost:5173"
+                "http://localhost:5173",
+                "https://workflow-commerce.vercel.app",
+                "https://workflow-commerce-g1lb93rqh-nishant200530s-projects.vercel.app"
         ));
 
         configuration.setAllowedHeaders(List.of("*"));
