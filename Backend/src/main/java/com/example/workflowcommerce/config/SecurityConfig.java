@@ -27,7 +27,7 @@ import com.example.workflowcommerce.security.jwt.AuthTokenFilter;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    // ✅ Inject filter (DO NOT use new)
+    // Inject filter (DO NOT use new)
     @Autowired
     private AuthTokenFilter authTokenFilter;
 
