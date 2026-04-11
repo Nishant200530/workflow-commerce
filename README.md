@@ -94,6 +94,17 @@ Create, update, and manage product inventory with SKU and category mapping.
 </td>
 <td width="50%">
 
+<tr>
+<td width="50%">
+
+### Added Products
+Display of products added to the system, including details such as SKU, price, inventory status, and options to add items to the cart or wishlist.
+
+![Added Products](screenshots/product.png)
+
+</td>
+</tr>
+
 ### Category Management
 Centralized taxonomy management with product counts and activation controls.
 
