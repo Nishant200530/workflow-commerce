@@ -68,18 +68,36 @@ Payment processing interface with transaction status, payment method tracking, a
 <tr>
 <td width="50%">
 
-### Workflows
-Workflow definitions and state machine configurations with visual state diagrams and transition rules.
+### Product Catalog
+Browse products by category with inventory status and wishlist support.
 
-![Workflows](screenshots/product-catalog.png)
+![Product Catalog](screenshots/product-catalog.png)
 
 </td>
 <td width="50%">
 
-### Shipping Dashboard
-Shipment tracking and fulfillment management with courier details, tracking numbers, and delivery status.
+### Shopping Cart & Checkout
+Manage cart items, apply coupons, and place orders with shipping details.
 
-![Shipping Dashboard](screenshots/admin-panel.png)
+![Shopping Cart](screenshots/cart.png)
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### Product Management
+Create, update, and manage product inventory with SKU and category mapping.
+
+![Product Management](screenshots/product_management.png)
+
+</td>
+<td width="50%">
+
+### Category Management
+Centralized taxonomy management with product counts and activation controls.
+
+![Category Management](screenshots/category_management.png)
 
 </td>
 </tr>
