@@ -29,89 +29,68 @@
 ## Screenshots
 
 <table>
-<tr>
-<td width="50%">
+  <tr>
+    <td width="50%" align="center">
+      <h3>Operations Dashboard</h3>
+      <p>Real-time metrics showing active workflows, order pipeline status, and KPI cards for monitoring system throughput.</p>
+      <img src="screenshots/dashboard.png" alt="Operations Dashboard" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <h3>Order Operations</h3>
+      <p>Interactive order lifecycle management with status tracking, workflow state transitions, and action controls.</p>
+      <img src="screenshots/workflow-states.png" alt="Order Operations" width="100%">
+    </td>
+  </tr>
 
-### Operations Dashboard
-Real-time metrics showing active workflows, order pipeline status, and KPI cards for monitoring system throughput.
+  <tr>
+    <td width="50%" align="center">
+      <h3>Audit Logs</h3>
+      <p>Chronological event log capturing every state transition with performer identity, timestamps, and action context.</p>
+      <img src="screenshots/audit-logs.png" alt="Audit Logs" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <h3>Payment Management</h3>
+      <p>Payment processing interface with transaction status, payment method tracking, and order-payment linking.</p>
+      <img src="screenshots/order-management.png" alt="Payment Management" width="100%">
+    </td>
+  </tr>
 
-![Operations Dashboard](screenshots/dashboard.png)
+  <tr>
+    <td width="50%" align="center">
+      <h3>Product Catalog</h3>
+      <p>Browse products by category with inventory status and wishlist support.</p>
+      <img src="screenshots/product-catalog.png" alt="Product Catalog" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <h3>Shopping Cart & Checkout</h3>
+      <p>Manage cart items, apply coupons, and place orders with shipping details.</p>
+      <img src="screenshots/cart.png" alt="Shopping Cart" width="100%">
+    </td>
+  </tr>
 
-</td>
-<td width="50%">
+  <tr>
+    <td width="50%" align="center">
+      <h3>Product Management</h3>
+      <p>Create, update, and manage product inventory with SKU and category mapping.</p>
+      <img src="screenshots/product_management.png" alt="Product Management" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <h3>Category Management</h3>
+      <p>Centralized taxonomy management with product counts and activation controls.</p>
+      <img src="screenshots/category_management.png" alt="Category Management" width="100%">
+    </td>
+  </tr>
 
-### Order Operations
-Interactive order lifecycle management with status tracking, workflow state transitions, and action controls.
-
-![Order Operations](screenshots/workflow-states.png)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### Audit Logs
-Chronological event log capturing every state transition with performer identity, timestamps, and action context.
-
-![Audit Logs](screenshots/audit-logs.png)
-
-</td>
-<td width="50%">
-
-### Payment Management
-Payment processing interface with transaction status, payment method tracking, and order-payment linking.
-
-![Payment Management](screenshots/order-management.png)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### Product Catalog
-Browse products by category with inventory status and wishlist support.
-
-![Product Catalog](screenshots/product-catalog.png)
-
-</td>
-<td width="50%">
-
-### Shopping Cart & Checkout
-Manage cart items, apply coupons, and place orders with shipping details.
-
-![Shopping Cart](screenshots/cart.png)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### Product Management
-Create, update, and manage product inventory with SKU and category mapping.
-
-![Product Management](screenshots/product_management.png)
-
-</td>
-<td width="50%">
-
-<tr>
-<td width="50%">
-
-### Added Products
-Display of products added to the system, including details such as SKU, price, inventory status, and options to add items to the cart or wishlist.
-
-![Added Products](screenshots/product.png)
-
-</td>
-</tr>
-
-### Category Management
-Centralized taxonomy management with product counts and activation controls.
-
-![Category Management](screenshots/category_management.png)
-
-</td>
-</tr>
+  <tr>
+    <td width="50%" align="center">
+      <h3>Added Products</h3>
+      <p>Display of products added to the system, including details such as SKU, price, inventory status, and options to add items to the cart or wishlist.</p>
+      <img src="screenshots/product.png" alt="Added Products" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <!-- Optional: Keep this empty for symmetry or add another screenshot -->
+    </td>
+  </tr>
 </table>
 
 ---
